@@ -1,45 +1,23 @@
 package stepdefinitions;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java8.En;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
-import utils.ExtentReports.ExtentManager;
+import utils.driver.Driver;
 
 import static org.testng.Assert.assertTrue;
+import static stepdefinitions.SetUp.test;
 
 public class Login implements En {
     LoginPage page;
-    WebDriver driver;
     WebDriverWait wait;
-    ExtentReports extent;
-    ExtentTest test;
-
-    @Before
-    public void setup(Scenario scenario){
-        extent = ExtentManager.GetExtent();
-        test = extent.createTest(scenario.getName());
-        driver = Driver.getWebDriver();
-    }
-
-    @After
-    public void tearDown(){
-        test.assignAuthor("Malachi");
-        extent.flush();
-        Driver.quitWebDriver();
-    }
 
     public Login() {
 
         Given("^I'm on the login page$", () -> {
-            page = new LoginPage(driver, wait);
+            page = new LoginPage(Driver.getWebDriver(), wait);
             test.log(Status.PASS, "Login page instantiated.");
         });
 

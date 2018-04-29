@@ -1,4 +1,4 @@
-package stepdefinitions;
+package utils.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,6 +7,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class holds a static WebDriver so that there can only ever be one webdriver in use at once. This also means there
+ * can be no parallel testing.
+ */
 public class Driver {
     private static WebDriver webDriver;
 

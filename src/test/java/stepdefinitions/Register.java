@@ -1,46 +1,25 @@
 package stepdefinitions;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java8.En;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageobjects.RegisterPage;
 import pageobjects.RegistrationCompletePage;
-import utils.ExtentReports.ExtentManager;
+import utils.driver.Driver;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+import static stepdefinitions.SetUp.test;
 
 public class Register implements En{
     RegisterPage page;
-    WebDriver driver;
     WebDriverWait wait;
-    ExtentReports extent;
-    ExtentTest test;
-
-    @Before
-    public void setup(Scenario scenario){
-        extent = ExtentManager.GetExtent();
-        test = extent.createTest(scenario.getName());
-        driver = Driver.getWebDriver();
-    }
-
-    @After
-    public void tearDown(){
-        test.assignAuthor("Malachi");
-        extent.flush();
-        Driver.quitWebDriver();
-    }
 
     public Register() {
 
         Given("^I'm on the register page$", () -> {
-            page = new RegisterPage(driver, wait);
+            page = new RegisterPage(Driver.getWebDriver(), wait);
             test.log(Status.PASS, "Register page instantiated.");
         });
 
@@ -80,6 +59,7 @@ public class Register implements En{
                 test.log(Status.PASS, "Clicked register button.");
             } catch (Exception e){
                 test.log(Status.FAIL, e.toString());
+                fail("Something went wrong:\n" + e.getMessage());
             }
         });
 
@@ -89,38 +69,68 @@ public class Register implements En{
                 test.log(Status.PASS, "Taken to Registration complete page.");
             } catch (AssertionError a){
                 test.log(Status.FAIL, "Not taken to Registration complete page.");
+                fail("Not taken to Registration complete page.");
+            }
+        });
+
+        When("^I input an invalid email$", () -> {
+            try {
+                page.fillEmail("paul!!!!");
+                test.log(Status.PASS, "Input an invalid email.");
+            } catch (Exception e){
+                test.log(Status.FAIL, e.getMessage());
+                fail("Something went wring:\n" + e.getMessage());
             }
 
         });
 
-        When("^I input an invalid email$", () -> {
-            page.fillEmail("paul!!!!");
-            test.log(Status.PASS, "Input an invalid email.");
-
-        });
-
         Then("^I should not be taken to the registration complete page$", () -> {
-            Assert.assertFalse(page.getCurrentUrl().equals(new RegistrationCompletePage().getURL()));
-            test.log(Status.PASS, "Not taken to the registration complete page");
+            try {
+                Assert.assertFalse(page.getCurrentUrl().equals(new RegistrationCompletePage().getURL()));
+                test.log(Status.PASS, "Not taken to the registration complete page");
+            } catch (AssertionError a){
+                test.log(Status.FAIL, a.getMessage());
+                fail("Assertion failed:\n" + a.getMessage());
+            }
         });
 
         And("^The Error should read \"Wrong email\"$", () -> {
-            Assert.assertTrue(page.wrongEmail());
-            test.log(Status.PASS, "The error reads: \"Wrong email\"");
+            try {
+                Assert.assertTrue(page.wrongEmail());
+                test.log(Status.PASS, "The error reads: \"Wrong email\"");
+            } catch (AssertionError a){
+                test.log(Status.FAIL, a.getMessage());
+                fail("Assertion failed:\n" + a.getMessage());
+            }
         });
 
         And("^The Error should read \"The password should have at least 6 characters.\"$", () -> {
-            Assert.assertTrue(page.invalidPassword());
-            test.log(Status.PASS, "The error reads: \"The password should have at least 6 characters.\"");
+            try {
+                Assert.assertTrue(page.invalidPassword());
+                test.log(Status.PASS, "The error reads: \"The password should have at least 6 characters.\"");
+            } catch (AssertionError a){
+                test.log(Status.FAIL, a.getMessage());
+                fail("Assertion failed:\n" + a.getMessage());
+            }
         });
 
         And("^The Error should read \"The password and confirmation password do not match.\"$", () -> {
-            Assert.assertTrue(page.mismatchedPassword());
-            test.log(Status.PASS, "The error reads: \"The password and confirmation password do not match.\"");
+            try {
+                Assert.assertTrue(page.mismatchedPassword());
+                test.log(Status.PASS, "The error reads: \"The password and confirmation password do not match.\"");
+            } catch (AssertionError a){
+                test.log(Status.FAIL, "The Error doesn't read: \"The password and confirmation password do not match.\"");
+                fail("The Error doesn't read: \"The password and confirmation password do not match.\"");
+            }
         });
 
         And("^I input an invalid password in the register page$", () -> {
-            page.fillPassword("1");
+            try {
+                page.fillPassword("1");
+            } catch (Exception e){
+                test.log(Status.FAIL, e.getMessage());
+                fail("Something went wrong:\n" + e.getMessage());
+            }
         });
 
         Then("^I should not be taken from the register page to the home page$", () -> {
@@ -129,12 +139,17 @@ public class Register implements En{
                 test.log(Status.PASS, "Not taken to homepage.");
             } catch (AssertionError a){
                 test.log(Status.FAIL, "Left the register page.");
+                fail(a.getMessage());
             }
-
         });
 
         And("^I confirm an invalid password$", () -> {
-            page.confirmPassword("123");
+            try {
+                page.confirmPassword("123");
+            } catch (Exception e){
+                test.log(Status.FAIL, e.getMessage());
+                fail("Something went wrong:\n" + e.getMessage());
+            }
         });
     }
 }
