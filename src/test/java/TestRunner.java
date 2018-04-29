@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
         format = { "pretty", "json:target/json/output.json", "html:target/html/output.html" },
         features = {"C:\\Users\\Admin\\OneDrive - Planit Software Testing\\Code\\SeleniumPageObjectDemo\\src\\test\\resources\\cucumber\\"},
-        glue = {"stepdefinitions"}/*, tags = {"@PasswordsDon'tMatch"}/*,"@RegisterSuccess"}*/)
+        glue = {"stepdefinitions"}, tags = {"@LoginSuccess"}/*,"@RegisterSuccess"}*/)
 public class TestRunner  extends AbstractTestNGCucumberTests {
 
 
