@@ -19,7 +19,7 @@ public class ShoppingCartPage extends DemoWebShopPage {
 
     public CheckoutPage clickCheckout() {
         checkout.click();
-        return new CheckoutPage(getDriver(),getWait());
+        return new CheckoutPage(getDriver(), getWait());
     }
 
     public void clickAcceptTermsOfService() {

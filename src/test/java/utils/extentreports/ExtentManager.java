@@ -28,7 +28,6 @@ public class ExtentManager {
     }
 
     private static ExtentHtmlReporter getHtmlReporter() {
-
         htmlReporter = new ExtentHtmlReporter(filePath);
 
         // make the charts visible on report open

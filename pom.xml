@@ -3,19 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>groupId</groupId>
+    <repositories>
+        <repository>
+            <id>extent report</id>
+            <url>https://mvnrepository.com/artifact/com.aventstack/extentreports</url>
+        </repository>
+    </repositories>
+    <groupId>com.DemoWebShop</groupId>
     <artifactId>DemoWebShop</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit</artifactId>-->
-            <!--<version>4.11</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+    <dependency>
+        <url>https://mvnrepository.com/artifact/com.aventstack/extentreports</url>
+        <description>This is the extent report</description>
+        <groupId>com.aventstack</groupId>
+        <artifactId>extentreports</artifactId>
+        <version>3.1.5</version>
+        <scope>provided</scope>
+    </dependency>
 
     <build>
         <plugins>
