@@ -19,8 +19,8 @@ public class Driver {
 
     public static WebDriver getWebDriver() {
         if (webDriver == null || webDriver.toString().contains("null")){
-            String chrome = "C:\\Users\\Admin\\OneDrive - Planit Software Testing\\Code\\chromedriver_win32\\chromedriver.exe";    //HOME:*/ "C:\\Users\\Malachi\\OneDrive - Planit Software Testing\\Code\\chromedriver_win32\\chromedriver.exe";
-            System.setProperty("webdriver.chrome.driver", chrome);
+            String chromePath = System.getProperty("user.dir") + "\\src\\test\\resources\\chromedriver_win32\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver", chromePath);
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--disable-popup-blocking");
             chromeOptions.addArguments("--disable-infobars");

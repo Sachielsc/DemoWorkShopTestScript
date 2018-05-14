@@ -7,7 +7,5 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
         features = "src/test/resources/cucumber",//register.feature
         glue = {"stepdefinitions"}/*, tags = {"@RegisterSuccess"}*/)
 public class TestRunner extends AbstractTestNGCucumberTests {
-
-
 }
 
