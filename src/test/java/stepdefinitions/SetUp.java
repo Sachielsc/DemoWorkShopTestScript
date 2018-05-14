@@ -20,7 +20,6 @@ public class SetUp {
 
     @After
     public void tearDown(){
-        test.assignAuthor("Malachi");
         extent.flush();
         Driver.quitWebDriver();
     }

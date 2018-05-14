@@ -20,8 +20,8 @@ public class ExtentManager {
         }//avoid creating new instance of html file
         extent = new ExtentReports();
         extent.attachReporter(getHtmlReporter());
-        extent.setSystemInfo("Tester","Malachi McIntosh");
-        extent.setSystemInfo("OS","Windows 10");
+        extent.setSystemInfo("Author","Malachi McIntosh");
+        extent.setSystemInfo("Modified by","Charles SHU");
         extent.setSystemInfo("Browser","Google Chrome");
         extent.setSystemInfo("Date/Time", new Date().toString());
         return extent;
@@ -33,7 +33,7 @@ public class ExtentManager {
         // make the charts visible on report open
         htmlReporter.config().setChartVisibilityOnOpen(true);
         htmlReporter.config().setDocumentTitle("Automation report");
-        htmlReporter.config().setTheme(Theme.DARK);
+        htmlReporter.config().setTheme(Theme.STANDARD);
         htmlReporter.config().setReportName("WebShop Tests");
 
         return htmlReporter;
