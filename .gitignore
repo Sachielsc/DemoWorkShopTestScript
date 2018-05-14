@@ -1,7 +1,6 @@
 .idea
 out
 old
-
 target
 *.iml
 *.html
